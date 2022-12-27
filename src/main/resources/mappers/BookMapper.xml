@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.otakulib.otakulibserver.model.dao.BookMapper">
+  <resultMap id="BaseResultMap" type="com.otakulib.otakulibserver.model.pojo.Book">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="author_id" jdbcType="VARCHAR" property="authorId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
+    <result column="uploader_id" jdbcType="VARCHAR" property="uploaderId" />
+    <result column="language" jdbcType="INTEGER" property="language" />
+    <result column="book_type" jdbcType="INTEGER" property="bookType" />
+    <result column="file_type" jdbcType="INTEGER" property="fileType" />
+    <result column="series_id" jdbcType="VARCHAR" property="seriesId" />
+    <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl" />
+    <result column="view_num" jdbcType="BIGINT" property="viewNum" />
+    <result column="downloads" jdbcType="BIGINT" property="downloads" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, book_name, author_id, description, book_cover, uploader_id, `language`, book_type, 
+    file_type, series_id, resource_url, view_num, downloads, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from book
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.otakulib.otakulibserver.model.pojo.Book">
+    insert into book (id, book_name, author_id, 
+      description, book_cover, uploader_id, 
+      `language`, book_type, file_type, 
+      series_id, resource_url, view_num, 
+      downloads, create_time, update_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, #{authorId,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{bookCover,jdbcType=VARCHAR}, #{uploaderId,jdbcType=VARCHAR}, 
+      #{language,jdbcType=INTEGER}, #{bookType,jdbcType=INTEGER}, #{fileType,jdbcType=INTEGER}, 
+      #{seriesId,jdbcType=VARCHAR}, #{resourceUrl,jdbcType=VARCHAR}, #{viewNum,jdbcType=BIGINT}, 
+      #{downloads,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.otakulib.otakulibserver.model.pojo.Book">
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bookName != null">
+        book_name,
+      </if>
+      <if test="authorId != null">
+        author_id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="bookCover != null">
+        book_cover,
+      </if>
+      <if test="uploaderId != null">
+        uploader_id,
+      </if>
+      <if test="language != null">
+        `language`,
+      </if>
+      <if test="bookType != null">
+        book_type,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="seriesId != null">
+        series_id,
+      </if>
+      <if test="resourceUrl != null">
+        resource_url,
+      </if>
+      <if test="viewNum != null">
+        view_num,
+      </if>
+      <if test="downloads != null">
+        downloads,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null">
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null">
+        #{authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCover != null">
+        #{bookCover,jdbcType=VARCHAR},
+      </if>
+      <if test="uploaderId != null">
+        #{uploaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=INTEGER},
+      </if>
+      <if test="bookType != null">
+        #{bookType,jdbcType=INTEGER},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=INTEGER},
+      </if>
+      <if test="seriesId != null">
+        #{seriesId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null">
+        #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="viewNum != null">
+        #{viewNum,jdbcType=BIGINT},
+      </if>
+      <if test="downloads != null">
+        #{downloads,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.otakulib.otakulibserver.model.pojo.Book">
+    update book
+    <set>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null">
+        author_id = #{authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCover != null">
+        book_cover = #{bookCover,jdbcType=VARCHAR},
+      </if>
+      <if test="uploaderId != null">
+        uploader_id = #{uploaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        `language` = #{language,jdbcType=INTEGER},
+      </if>
+      <if test="bookType != null">
+        book_type = #{bookType,jdbcType=INTEGER},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=INTEGER},
+      </if>
+      <if test="seriesId != null">
+        series_id = #{seriesId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null">
+        resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="viewNum != null">
+        view_num = #{viewNum,jdbcType=BIGINT},
+      </if>
+      <if test="downloads != null">
+        downloads = #{downloads,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.otakulib.otakulibserver.model.pojo.Book">
+    update book
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      book_cover = #{bookCover,jdbcType=VARCHAR},
+      uploader_id = #{uploaderId,jdbcType=VARCHAR},
+      `language` = #{language,jdbcType=INTEGER},
+      book_type = #{bookType,jdbcType=INTEGER},
+      file_type = #{fileType,jdbcType=INTEGER},
+      series_id = #{seriesId,jdbcType=VARCHAR},
+      resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      view_num = #{viewNum,jdbcType=BIGINT},
+      downloads = #{downloads,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

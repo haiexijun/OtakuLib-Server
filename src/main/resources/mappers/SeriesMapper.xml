@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.otakulib.otakulibserver.model.dao.SeriesMapper">
+  <resultMap id="BaseResultMap" type="com.otakulib.otakulibserver.model.pojo.Series">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="series_name" jdbcType="VARCHAR" property="seriesName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="view_num" jdbcType="BIGINT" property="viewNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, series_name, description, view_num
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from series
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from series
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.otakulib.otakulibserver.model.pojo.Series">
+    insert into series (id, series_name, description, 
+      view_num)
+    values (#{id,jdbcType=VARCHAR}, #{seriesName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{viewNum,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.otakulib.otakulibserver.model.pojo.Series">
+    insert into series
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="seriesName != null">
+        series_name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="viewNum != null">
+        view_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null">
+        #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="viewNum != null">
+        #{viewNum,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.otakulib.otakulibserver.model.pojo.Series">
+    update series
+    <set>
+      <if test="seriesName != null">
+        series_name = #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="viewNum != null">
+        view_num = #{viewNum,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.otakulib.otakulibserver.model.pojo.Series">
+    update series
+    set series_name = #{seriesName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      view_num = #{viewNum,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
