@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Object handleException(Exception e){
-        log.error("Default Exception : " +e);
+        log.error("Default System Exception : " +e);
         return ApiRestResponse.error(OtakuLibExceptionEnum.SYSTEM_ERROR);
     }
 
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(OtakuLibException.class)
     @ResponseBody
     public Object MallException(OtakuLibException e){
-        log.error("MallException : " +e);
+        log.error("OtakuLibException : " +e);
         return ApiRestResponse.error(e.getCode(),e.getMessage());
     }
 
